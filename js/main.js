@@ -125,3 +125,32 @@ function killEvent() {
         d3.event.stopPropagation();
     }
 };
+
+function inicioFinalCaminho(index) {
+    d3.event.stopPropagation();
+    d3.event.preventDefault();
+    if (mapdata.getstate.fromNode === null) {
+
+        mapdata.getstate.fromNode = index;
+    }
+    else {
+        if (mapdata.getstate.fromNode === index) {
+
+            return;
+        }
+
+        mapdata.getstate.toNode = index;
+        console.log(index + " Node lar");
+        var pathDatum = {
+            id: mapdata.caminhos.length,
+            from: mapdata.getstate.fromNode,
+            to: index
+        };
+        mapdata.caminhos.push(pathDatum);
+        calculadistancianodes();
+        lertodasLinhas();
+        lerTodosNos();
+        mapdata.getstate.fromNode = null;
+        mapdata.getstate.toNode = null;
+    }
+};

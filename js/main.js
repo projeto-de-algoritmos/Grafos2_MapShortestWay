@@ -67,3 +67,10 @@ $('#getMenorCaminho').on('click', function () {
     }
 
 });
+
+
+$('#limparMapa').on('click', function () {
+    LimparMapa();
+
+});
+

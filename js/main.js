@@ -45,3 +45,25 @@ $("#coordenada").on('click',function () {
     }
 
 });
+
+$('#getMenorCaminho').on('click', function () {
+    d3.selectAll("line").classed({ "shortest": false });
+    calculadistancianodes();
+    if (!$(mapdata.getui.htmlSelectStartingNode).val() || !$(mapdata.getui.htmlSelectEndNode).val()) return;
+    var sourceNode = $(mapdata.getui.htmlSelectStartingNode).val();
+    var targetNode = $(mapdata.getui.htmlSelectEndNode).val();
+    var results = dijkstra(sourceNode, targetNode);
+    if (results.path) {
+        results.path.forEach(function (step) {
+
+            var dist = mapdata.distancia[step.source][step.target]
+            stepLine = d3.select(
+                "line.from" + step.source + "to" + step.target + ","
+                + "line.from" + step.target + "to" + step.source
+            );
+            stepLine.classed({ "shortest": true });
+
+        });
+    }
+
+});

@@ -74,3 +74,33 @@ $('#limparMapa').on('click', function () {
 
 });
 
+
+function addNoSelecionado(noSelecionado) {
+    $(mapdata.getui.htmlSelectStartingNode).append($("<option></option>").attr("value", noSelecionado).text(noSelecionado));
+    $(mapdata.getui.htmlSelectEndNode).append($("<option></option>").attr("value", noSelecionado).text(noSelecionado));
+};
+
+function LimparMapa() {
+    mapdata.allNodes = [];
+    mapdata.caminhos = [];
+    $(mapdata.getui.htmlSelectStartingNode).empty();
+    $(mapdata.getui.htmlSelectEndNode).empty();
+    $("#results").empty();
+    $('#svg-map').css({
+        'background-image': 'url(' + null + ')'
+
+    });
+    lerTodosNos();
+    lertodasLinhas();
+
+};
+
+
+
+function nodeClick(d, i) {
+    console.log("node:click %s", i);
+    console.log(d);
+
+    d3.event.preventDefault();
+    d3.event.stopPropagation();
+};

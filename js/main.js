@@ -24,3 +24,24 @@ LatandLong.prototype.distanceTo = function (point, radius) {
     var d = R * c;
     return d;
 };
+
+
+var drawManager = d3.behavior.drag()
+    .on('dragstart', arrastaNoStart())
+    .on('drag', arrastaNo())
+    .on('dragend', arrastaNoEnd());
+
+$("#coordenada").on('click',function () {
+   
+    var valuelat = $("#latitude").val();
+    var valuelong = $("#longitude").val();
+    LimparMapa();
+
+    if (valuelat == '' || valuelong == '' ){
+      alert("Entre com a latitude e a longitude");  
+    }
+    else {
+        maps.setView(new L.LatLng(valuelat, valuelong), 10);
+    }
+
+});

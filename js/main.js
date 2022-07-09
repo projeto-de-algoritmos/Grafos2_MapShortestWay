@@ -174,3 +174,105 @@ function calculadistancianodes() {
         mapdata.distancia[targetNodeId][sourceNodeId] = d;
     };
 };
+
+// no de inici e no final
+function dijkstra(inicio, final) {
+
+    //conta os nós
+    var nodeCount = mapdata.distancia.length,
+        infinity = 99999, // infinity
+        // armazena os menores caminhos
+        shortestPath = new Array(nodeCount),
+        // marca o no como visitado
+        nodeChecked = new Array(nodeCount),
+        pred = new Array(nodeCount);
+
+    // armazena o menor caminho
+    for (var i = 0; i < nodeCount; i++) {
+        shortestPath[i] = infinity;
+        pred[i] = null;
+        nodeChecked[i] = false;
+    }
+
+    shortestPath[inicio] = 0;
+
+    for (var i = 0; i < nodeCount; i++) {
+
+        var minDist = infinity;
+        var closestNode = null;
+
+        for (var j = 0; j < nodeCount; j++) {
+
+            if (!nodeChecked[j]) {
+                if (shortestPath[j] <= minDist) {
+                    minDist = shortestPath[j];
+                    closestNode = j;
+                }
+            }
+        }
+
+        // fecha o nó
+        nodeChecked[closestNode] = true;
+
+        for (var k = 0; k < nodeCount; k++) {
+            if (!nodeChecked[k]) {
+                // ve as distâncias
+                var nextDistance = distanciaentrenos(closestNode, k, mapdata.distancia);
+                if ((parseInt(shortestPath[closestNode]) + parseInt(nextDistance)) < parseInt(shortestPath[k])) {
+                    // ve o mais longe
+                    soFar = parseInt(shortestPath[closestNode]);
+                    extra = parseInt(nextDistance);
+                    shortestPath[k] = soFar + extra;
+                    pred[k] = closestNode;
+                }
+            }
+        }
+
+    }
+
+    if (shortestPath[final] < infinity) {
+
+        var newPath = [];
+        var step = {
+            target: parseInt(final)
+        };
+
+        var v = parseInt(final);
+
+        while (v >= 0) {
+            v = pred[v];
+            if (v !== null && v >= 0) {
+                step.source = v;
+                newPath.unshift(step);
+                step = {
+                    target: v
+                };
+            }
+        }
+        // Vê a disancia  total
+        totalDistance = shortestPath[final];
+
+        return {
+            mesg: 'Status: OK',
+            path: newPath,
+            source: inicio,
+            target: final,
+            distance: totalDistance
+        };
+    } else {
+        return {
+            mesg: 'Sorry nenhum caminho encontrado',
+            path: null,
+            source: inicio,
+            target: final,
+            distance: 0
+        };
+    }
+
+    function distanciaentrenos(fromNode, toNode, distancia) {
+        dist = distancia[fromNode][toNode];
+        if (dist === 'x') dist = infinity;
+        return dist;
+    }
+
+};

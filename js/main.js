@@ -154,3 +154,23 @@ function inicioFinalCaminho(index) {
         mapdata.getstate.toNode = null;
     }
 };
+
+function calculadistancianodes() {
+    mapdata.distancia = [];
+    for (var i = 0; i < mapdata.allNodes.length; i++) {
+        mapdata.distancia[i] = [];
+        for (var j = 0; j < mapdata.allNodes.length; j++)
+            mapdata.distancia[i][j] = 'x';
+    }
+    for (var i = 0; i < mapdata.caminhos.length; i++) {
+        var sourceNodeId = parseInt(mapdata.caminhos[i].from);
+        var targetNodeId = parseInt(mapdata.caminhos[i].to);
+        var sourceNode = mapdata.allNodes[sourceNodeId];
+        var targetNode = mapdata.allNodes[targetNodeId];
+        var p1 = new LatandLong(sourceNode.x, sourceNode.y);
+        var p2 = new LatandLong(targetNode.x, targetNode.y);
+        var d = p1.distanceTo(p2);
+        mapdata.distancia[sourceNodeId][targetNodeId] = d;
+        mapdata.distancia[targetNodeId][sourceNodeId] = d;
+    };
+};

@@ -104,3 +104,24 @@ function nodeClick(d, i) {
     d3.event.preventDefault();
     d3.event.stopPropagation();
 };
+
+function arrastaNoStart() {
+    return function (d, i) {
+        console.log("dragging node " + i);
+
+    }
+};
+
+
+function arrastaNoEnd() {
+    return function (d, i) {
+        console.log("node " + i + " repositioned");
+    }
+};
+
+function killEvent() {
+    if (d3.event.preventDefault) {
+        d3.event.preventDefault();
+        d3.event.stopPropagation();
+    }
+};

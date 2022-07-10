@@ -1,0 +1,50 @@
+body {
+  padding-top: 20px;
+}
+
+circle {
+  fill: rgb(255, 251, 28);
+  stroke: #141c25;
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+.label {
+  font-family: arial;
+  stroke: #000000;
+  cursor: pointer;
+}
+
+line {
+  stroke: #1e1e1e;
+  stroke-dasharray: 5, 5;
+  stroke-width: 2;
+}
+
+line.shortest {
+  stroke: rgb(86, 0, 245);
+  stroke-dasharray: 5, 0;
+  stroke-width: 11;
+  -webkit-box-shadow: 4px 5px 5px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 5px 5px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 4px 5px 5px -1px rgba(0, 0, 0, 0.75);
+}
+
+.line-label {
+  font-family: arial;
+  font-size: 16px;
+  stroke: #a02a2a;
+}
+
+@media screen and (min-width: 768px) {
+  .masthead,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+#limpar {
+  margin: 10px auto;
+}

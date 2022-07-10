@@ -232,3 +232,5 @@ function lertodasLinhas() {
   });
   elementos.exit().remove();
 }
+
+

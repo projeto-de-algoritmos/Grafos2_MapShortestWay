@@ -47,3 +47,20 @@ svg = d3
   });
 
 maps.on("viewreset", viewChanges);
+
+function viewChanges() {
+  lerTodosNos();
+  lertodasLinhas();
+}
+
+maps.on('click', function (e) {
+  var nodeSelect = mapdata.allNodes.length;
+  console.log(e.latlng.lat + ", " + e.latlng.lng);
+
+  mapdata.allNodes.push({
+      name: nodeSelect, x: e.latlng.lat, y: e.latlng.lng
+  });
+
+  lerTodosNos();
+  addNoSelecionado(nodeSelect);
+});

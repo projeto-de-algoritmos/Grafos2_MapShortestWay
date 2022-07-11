@@ -68,7 +68,7 @@ maps.on("click", function (e) {
 
 function arrastaNo() {
   return function (p, i) {
-    let p = p;
+    var p = p;
     let s = true;
 
     maps.on("mousemove", function (e) {
